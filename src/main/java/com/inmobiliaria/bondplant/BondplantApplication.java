@@ -12,7 +12,7 @@ public class BondplantApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BondplantApplication.class, args);
-        logger.info("=================== Inmobiliaria BONDPLANT ========================");
+        logger.info("================= Inmobiliaria BONDPLANT ======================");
     }
 
 }
