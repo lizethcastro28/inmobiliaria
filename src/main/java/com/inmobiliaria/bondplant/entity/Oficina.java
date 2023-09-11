@@ -34,7 +34,7 @@ public class Oficina {
     private String direccion;
     @Column(name = "WEB", length = 60)
     private String web;
-    //private Long id_estado;
-    //private Long id_ciudad;
+    @ManyToOne
+    private Estado estado;
 
 }

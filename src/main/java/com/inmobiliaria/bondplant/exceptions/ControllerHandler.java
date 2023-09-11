@@ -1,7 +1,7 @@
 package com.inmobiliaria.bondplant.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.time.Instant;
-import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +40,13 @@ public final class ControllerHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handlerSqlException(DataIntegrityViolationException exception) {
         return (exception.getRootCause().getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handlerEntityNotFoundException(EntityNotFoundException exception) {
+        System.out.println("aquiiiiiiiiiiiiiiiiiii-----iiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        return (exception.toString());
     }
 
     @ExceptionHandler(InvalidDataAccessResourceUsageException.class)
