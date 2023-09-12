@@ -45,7 +45,6 @@ public final class ControllerHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handlerEntityNotFoundException(EntityNotFoundException exception) {
-        System.out.println("aquiiiiiiiiiiiiiiiiiii-----iiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         return (exception.toString());
     }
 

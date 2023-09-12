@@ -3,7 +3,7 @@
  * Created: 11 sep. 2023
  */
 
-INSERT INTO `estados` (`id_estado`, `estado`) VALUES
+INSERT IGNORE INTO `estados` (`id_estado`, `estado`) VALUES
 (1, 'Amazonas'),
 (2, 'Anzoátegui'),
 (3, 'Apure'),
