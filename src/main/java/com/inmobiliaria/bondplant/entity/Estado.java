@@ -3,9 +3,11 @@ package com.inmobiliaria.bondplant.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,4 +26,6 @@ public final class Estado {
     private Integer id;
     @Column(name = "ESTADO", nullable = false, length = 100, unique = true)
     private String estado;
+    //@OneToMany(mappedBy="estado")
+    //private Set<Oficina> oficinas;
 }

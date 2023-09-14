@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -26,11 +27,20 @@ public class OficinaController {
     private static final Logger logger = LoggerFactory.getLogger(OficinaController.class);
     @Autowired
     OficinaService oficinaService;
-    
+
     @GetMapping("/oficinas")
     public ResponseEntity getOficinas() {
-         logger.info("---------Request mapping getOficina:-------------------------------------");
-        Iterable<Oficina> oficinas = oficinaService.findAll();
+        logger.info("---------Request mapping getOficina:-----------------");
+        Iterable<Oficina> oficinas = oficinaService.findAll();        
+        if (oficinas.iterator().hasNext()) {
+            return ResponseEntity.ok().body(oficinas);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/oficinas/estados/{id_estado}")
+    public ResponseEntity getOficinasPorEstado(@PathVariable int id_estado) {
+        Iterable<Oficina> oficinas = oficinaService.findAllByState(id_estado);        
         if (oficinas.iterator().hasNext()) {
             return ResponseEntity.ok().body(oficinas);
         } else {
@@ -52,11 +62,8 @@ public class OficinaController {
 
     @PostMapping("/oficinas")
     public ResponseEntity addOficina(@Valid @RequestBody Oficina oficina) {
-        logger.info("---------Request mapping getOficina: " + oficina.toString());
         Oficina aux = oficinaService.save(oficina);
-        System.out.println("------se guarda la oficina: " + aux.toString());
         return ResponseEntity.ok().body(aux);
     }
 
 }
-

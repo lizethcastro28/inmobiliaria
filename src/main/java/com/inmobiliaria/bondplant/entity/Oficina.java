@@ -1,5 +1,6 @@
 package com.inmobiliaria.bondplant.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -34,7 +35,8 @@ public class Oficina {
     private String direccion;
     @Column(name = "WEB", length = 60)
     private String web;
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
 
 }

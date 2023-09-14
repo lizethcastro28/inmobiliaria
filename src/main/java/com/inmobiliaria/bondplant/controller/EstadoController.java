@@ -1,9 +1,7 @@
 package com.inmobiliaria.bondplant.controller;
 
 import com.inmobiliaria.bondplant.entity.Estado;
-import com.inmobiliaria.bondplant.entity.Oficina;
 import com.inmobiliaria.bondplant.service.EstadoService;
-import com.inmobiliaria.bondplant.service.OficinaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class EstadoController {
     EstadoService estadoService;
 
     @GetMapping("/estados")
-    public ResponseEntity getOficinas() {
+    public ResponseEntity getEstados() {
         Iterable<Estado> estados = estadoService.findAll();
         if (estados.iterator().hasNext()) {
             return ResponseEntity.ok().body(estados);
