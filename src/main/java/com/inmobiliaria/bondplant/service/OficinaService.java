@@ -34,7 +34,10 @@ public class OficinaService {
     }
 
     public Oficina save(Oficina oficina) {
-        logger.info("===========save oficina " + oficina);
         return oficinaRepository.save(oficina);
+    }
+    
+    public void deleteById(String id_oficina) {
+        oficinaRepository.deleteById(id_oficina);
     }
 }

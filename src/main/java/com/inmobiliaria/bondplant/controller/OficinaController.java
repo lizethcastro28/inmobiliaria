@@ -12,9 +12,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -30,17 +30,17 @@ public class OficinaController {
 
     @GetMapping("/oficinas")
     public ResponseEntity getOficinas() {
-        logger.info("---------Request mapping getOficina:-----------------");
-        Iterable<Oficina> oficinas = oficinaService.findAll();        
+        Iterable<Oficina> oficinas = oficinaService.findAll();
         if (oficinas.iterator().hasNext()) {
             return ResponseEntity.ok().body(oficinas);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping("/oficinas/estados/{id_estado}")
     public ResponseEntity getOficinasPorEstado(@PathVariable int id_estado) {
-        Iterable<Oficina> oficinas = oficinaService.findAllByState(id_estado);        
+        Iterable<Oficina> oficinas = oficinaService.findAllByState(id_estado);
         if (oficinas.iterator().hasNext()) {
             return ResponseEntity.ok().body(oficinas);
         } else {
@@ -50,7 +50,6 @@ public class OficinaController {
 
     @GetMapping("/oficinas/{id}")
     public ResponseEntity getOficina(@PathVariable String id) throws Exception {
-        logger.info("---------Request mapping getOficina: " + id);
         Optional<Oficina> oficina = oficinaService.findById(id);
         if (oficina.isPresent()) {
             return ResponseEntity.ok().body(oficina.get());
@@ -64,6 +63,18 @@ public class OficinaController {
     public ResponseEntity addOficina(@Valid @RequestBody Oficina oficina) {
         Oficina aux = oficinaService.save(oficina);
         return ResponseEntity.ok().body(aux);
+    }
+
+    @DeleteMapping("/oficinas/{id}")
+    public ResponseEntity deleteOficina(@PathVariable String id) throws Exception {
+        Optional<Oficina> oficina = oficinaService.findById(id);
+        if (oficina.isPresent()) {
+            oficinaService.deleteById(id);
+            return ResponseEntity.ok().body(oficina.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }
