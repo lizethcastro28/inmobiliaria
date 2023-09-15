@@ -67,10 +67,9 @@ public class OficinaController {
 
     @DeleteMapping("/oficinas/{id}")
     public ResponseEntity deleteOficina(@PathVariable String id) throws Exception {
-        Optional<Oficina> oficina = oficinaService.findById(id);
-        if (oficina.isPresent()) {
+        if (oficinaService.existById(id)) {
             oficinaService.deleteById(id);
-            return ResponseEntity.ok().body(oficina.get());
+            return ResponseEntity.ok().body(id);
         } else {
             return ResponseEntity.notFound().build();
         }

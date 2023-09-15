@@ -40,4 +40,7 @@ public class OficinaService {
     public void deleteById(String id_oficina) {
         oficinaRepository.deleteById(id_oficina);
     }
+    public boolean existById(String id_oficina) {
+        return oficinaRepository.existsById(id_oficina);
+    }
 }
