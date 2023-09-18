@@ -1,5 +1,6 @@
 package com.inmobiliaria.bondplant.entity;
 
+import com.inmobiliaria.bondplant.utilities.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -28,12 +29,20 @@ public class Oficina {
     @Column(name = "EMAIL", nullable = false, length = 30)
     @Email
     private String email;
-    @Column(name = "TIPO_OFICINA")
-    private boolean principal;
+
     @Column(name = "DIRECCION")
     private String direccion;
+
     @Column(name = "WEB", length = 60)
     private String web;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS", columnDefinition = "ENUM('ACTIVE', 'INACTIVE') default ACTIVE")
+    private Status status;
+    
+    @Column(name = "PRINCIPAL", columnDefinition = "boolean default false")
+    private Boolean principal;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;

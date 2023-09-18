@@ -2,6 +2,7 @@ package com.inmobiliaria.bondplant.controller;
 
 import com.inmobiliaria.bondplant.entity.Oficina;
 import com.inmobiliaria.bondplant.service.OficinaService;
+import com.inmobiliaria.bondplant.utilities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping(path = "/api")
 public class OficinaController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OficinaController.class);
+    private static final Logger logger = 
+            LoggerFactory.getLogger(OficinaController.class);
     @Autowired
     OficinaService oficinaService;
 
@@ -61,14 +63,19 @@ public class OficinaController {
 
     @PostMapping("/oficinas")
     public ResponseEntity addOficina(@Valid @RequestBody Oficina oficina) {
+        oficina.setStatus(Status.ACTIVE);
         Oficina aux = oficinaService.save(oficina);
         return ResponseEntity.ok().body(aux);
     }
 
     @DeleteMapping("/oficinas/{id}")
     public ResponseEntity deleteOficina(@PathVariable String id) throws Exception {
-        if (oficinaService.existById(id)) {
-            oficinaService.deleteById(id);
+        Optional<Oficina> oficina = oficinaService.findById(id);
+        if (oficina.isPresent()) {
+            oficina.get().setStatus(Status.INACTIVE);
+            oficinaService.save(oficina.get());
+            //eliminado fisico N/A
+            //oficinaService.deleteById(id);
             return ResponseEntity.ok().body(id);
         } else {
             return ResponseEntity.notFound().build();
