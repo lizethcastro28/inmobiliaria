@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  *
  * @author Lorena
  */
-@Repository
+@RepositoryRestResource(path = "oficinas")
 public interface OficinaRepository extends CrudRepository<Oficina, Object>,
         PagingAndSortingRepository<Oficina, Object> {
 
