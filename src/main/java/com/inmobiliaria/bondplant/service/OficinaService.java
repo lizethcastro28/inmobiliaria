@@ -16,7 +16,8 @@ import org.springframework.data.domain.Pageable;
 @Service
 public class OficinaService {
 
-    private static final Logger logger = LoggerFactory.getLogger(OficinaService.class);
+    private static final Logger logger = 
+            LoggerFactory.getLogger(OficinaService.class);
     @Autowired
     OficinaRepository oficinaRepository;
 
